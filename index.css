@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@700;400&display=swap');
+
+/* ==========================================
+   1. CONFIGURAÇÕES GERAIS E LAYOUT
+   ========================================== */
+body {
+    font-family: 'Arimo', sans-serif;
+    background-color: #f3f4f6; /* Fundo cinza bem claro para destacar a caixa central */
+    color: #111827; /* Texto escuro quase preto */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    transition: background-color 0.5s ease;
+}
+
+.container {
+    width: 100%;
+    max-width: 550px;
+    padding: 30px;
+    text-align: center;
+    background: #ffffff; /* Fundo branco limpo */
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05); /* Sombra muito suave */
+    margin-top: 2vh;
+    transition: all 0.5s ease;
+}
+
+h1 {
+    color: #111827;
+    font-size: 2.2rem;
+    letter-spacing: 0.2rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* ==========================================
+   2. CAIXA DE DICA (HINT)
+   ========================================== */
+.hint-box {
+    background-color: #eff6ff; /* Fundo azul bem claro */
+    border: 1px solid #bfdbfe; /* Borda azul suave */
+    border-radius: 8px;
+    padding: 12px 15px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.hint-tag {
+    background-color: #3b82f6; /* Azul primário forte */
+    color: #ffffff;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+#game-hint {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #1e3a8a; /* Texto azul escuro para contraste */
+    font-weight: 400;
+}
+
+/* ==========================================
+   3. GRADE DO JOGO
+   ========================================== */
+.board {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: 100%;
+    margin: 20px auto;
+}
+
+.word-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30px, 1fr)); 
+    gap: 6px;
+    width: 100%;
+}
+
+.letter-slot {
+    width: 100%; 
+    aspect-ratio: 1 / 1;
+    max-width: 60px;
+    border: 2px solid #d1d5db; /* Borda cinza clara */
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: clamp(1.2rem, 5vw, 2rem); 
+    font-weight: bold;
+    color: #111827;
+    transition: transform 0.2s, background-color 0.4s, border-color 0.4s;
+}
+
+/* ==========================================
+   4. CORES DE STATUS (Tema Claro)
+   ========================================== */
+.correct { 
+    background-color: #3aa394 !important; /* Verde Termo Clássico */
+    border-color: #3aa394 !important;
+    color: #ffffff !important;
+}
+
+.present { 
+    background-color: #d3ad69 !important; /* Amarelo Termo Clássico */
+    border-color: #d3ad69 !important;
+    color: #ffffff !important;
+}
+
+.wrong { 
+    background-color: #787c7e !important; /* Cinza Termo Clássico */
+    border-color: #787c7e !important;
+    color: #ffffff !important;
+}
+
+/* ==========================================
+   5. TECLADO VIRTUAL
+   ========================================== */
+#keyboard {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.key-row {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-bottom: 8px;
+}
+
+.key {
+    background-color: #e5e7eb; /* Teclas cinza claro */
+    color: #374151; /* Texto escuro */
+    border: none;
+    border-radius: 4px;
+    height: 55px;
+    min-width: 32px;
+    padding: 0 10px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+.key.large { 
+    min-width: 65px; 
+    font-size: 0.8rem; 
+}
+
+.key:active, .key:hover { 
+    background-color: #d1d5db; 
+}
+
+/* ==========================================
+   6. INPUTS E BOTÕES
+   ========================================== */
+#nickname-input {
+    background: #ffffff;
+    border: 2px solid #d1d5db;
+    color: #111827;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+#nickname-input:focus {
+    border-color: #3aa394;
+}
+
+#letter-input {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    background-color: #ffffff;
+    border: 2px solid #9ca3af; /* Borda um pouco mais escura para destacar */
+    color: #111827;
+    border-radius: 8px;
+    margin: 20px auto;
+    display: block;
+    outline: none;
+    caret-color: transparent; 
+    transition: border-color 0.3s, transform 0.2s;
+}
+
+#letter-input:focus {
+    border-color: #3aa394; /* Verde quando focado */
+    transform: scale(1.05);
+}
+
+#reset-btn {
+    background: #111827; /* Botão escuro moderno */
+    color: #ffffff;
+    border: none;
+    padding: 12px 30px;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1rem;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+#reset-btn:hover {
+    background: #374151;
+}
+
+/* Utilitários */
+.hidden { 
+    display: none !important; 
+}
+
+/* Mensagens do jogo */
+.status-info {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #4b5563;
+}

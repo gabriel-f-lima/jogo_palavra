@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termo Clone</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Adivinhe a Palavra</h1>
+
+        <div id="setup-container">
+            <input onkeydown="iniciarJogo(event)" type="text" id="nickname-input" placeholder="Digite seu nickname">
+        </div>
+
+        <div id="hint-container" class="hint-box hidden">
+            <span class="hint-tag">DICA</span>
+            <p id="game-hint"></p>
+        </div>
+
+        <div id="game-container" class="hidden">
+            <h2 id="player-display"></h2>
+
+            <div id="word-display" class="word-slots"></div>
+
+            <input onkeydown="verificarLetra(event)" type="text" id="letter-input" maxlength="1" autocomplete="off">
+
+            <div id="keyboard">
+                <div class="key-row">
+                    <button class="key" onclick="digitar('Q')">Q</button>
+                    <button class="key" onclick="digitar('W')">W</button>
+                    <button class="key" onclick="digitar('E')">E</button>
+                    <button class="key" onclick="digitar('R')">R</button>
+                    <button class="key" onclick="digitar('T')">T</button>
+                    <button class="key" onclick="digitar('Y')">Y</button>
+                    <button class="key" onclick="digitar('U')">U</button>
+                    <button class="key" onclick="digitar('I')">I</button>
+                    <button class="key" onclick="digitar('O')">O</button>
+                    <button class="key" onclick="digitar('P')">P</button>
+                </div>
+                <div class="key-row">
+                    <button class="key" onclick="digitar('A')">A</button>
+                    <button class="key" onclick="digitar('S')">S</button>
+                    <button class="key" onclick="digitar('D')">D</button>
+                    <button class="key" onclick="digitar('F')">F</button>
+                    <button class="key" onclick="digitar('G')">G</button>
+                    <button class="key" onclick="digitar('H')">H</button>
+                    <button class="key" onclick="digitar('J')">J</button>
+                    <button class="key" onclick="digitar('K')">K</button>
+                    <button class="key" onclick="digitar('L')">L</button>
+                    <button class="key large" onclick="apagar()">⌫</button>
+                </div>
+                <div class="key-row">
+                    <button class="key" onclick="digitar('Z')">Z</button>
+                    <button class="key" onclick="digitar('X')">X</button>
+                    <button class="key" onclick="digitar('C')">C</button>
+                    <button class="key" onclick="digitar('V')">V</button>
+                    <button class="key" onclick="digitar('B')">B</button>
+                    <button class="key" onclick="digitar('N')">N</button>
+                    <button class="key" onclick="digitar('M')">M</button>
+                    <button class="key large" onclick="enviar()">ENTER</button>
+                </div>
+            </div>
+
+            <div class="status-info">
+                <p>Erros permitidos: <strong style="color: #e95e50;"><span id="error-count">0</span> / 4</strong></p>
+                <p id="game-message"></p>
+                <div id="final-word-display" class="hidden"></div>
+            </div>
+
+            <button onclick="reiniciarJogo()" id="reset-btn" class="hidden">Jogar Novamente</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+
+</html>
