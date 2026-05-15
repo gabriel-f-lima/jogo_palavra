@@ -8,6 +8,9 @@ const inputLetra = document.getElementById('letter-input');
 const gameHint = document.getElementById('game-hint');
 const hintContainer = document.getElementById('hint-container');
 const URL_API = 'https://api-palavras-8ptt.onrender.com';
+const botoes = document.querySelectorAll('.nivel-btn button');
+let nivelSelecionado = 'facil';
+
 
 // ==========================================
 // SISTEMA DE ÁUDIO (Web Audio API)
@@ -25,6 +28,12 @@ function tocarSom(frequencia, tipo, duracao) {
     osc.start();
     gain.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duracao);
     osc.stop(audioCtx.currentTime + duracao);
+}
+function selecionarNivel(nivel) {
+    nivelSelecionado = nivel;
+    botoes.forEach(btn => btn.classList.remove('active'));
+    event.currentTarget.classList.add('active');
+    console.log("Nível selecionado:", nivel);
 }
 
 function somAcerto() {
@@ -63,8 +72,8 @@ async function iniciarJogo(event) {
     if (event.key === 'Enter') {
         const nickname = document.getElementById('nickname-input').value;
 
-        if (!nickname) {
-            alert('Por favor, digite um nickname para iniciar o jogo.');
+        if (!nickname || !nivelSelecionado) {
+            alert('Por favor, digite um nickname e selecione um nível para iniciar o jogo.');
             return;
         }
 
@@ -72,7 +81,7 @@ async function iniciarJogo(event) {
             method: 'POST',
             credentials: 'include',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ nickname: nickname })
+            body: JSON.stringify({ nickname: nickname, nivel: nivelSelecionado })
         });
         const data = await response.json();
 
@@ -80,9 +89,11 @@ async function iniciarJogo(event) {
             alert(data.erro);
             return;
         }
-        
+        botoes.forEach(btn => btn.classList.add('hidden'));
         setupContainer.classList.add('hidden');
+        footer.classList.add('hidden');
         gameContainer.classList.remove('hidden');
+        
         document.getElementById('player-display').innerText = data.mensagem;
 
         buscarPalavra();
@@ -100,6 +111,7 @@ async function buscarPalavra() {
     if (data.dica) {
         gameHint.innerText = data.dica;
         hintContainer.classList.remove('hidden');
+        
     }
 
     wordDisplay.innerHTML = '';
@@ -168,6 +180,7 @@ async function processarTentativa() {
     if (data.status_jogo !== 'Jogando') {
     resetBtn.classList.remove('hidden');
     inputLetra.disabled = true;
+    nivelBtn.classList.remove('hidden'); // Esconde os botões de nível
     inputLetra.style.opacity = "0"; // Esconde o input para focar no resultado
 
     const titulo = document.querySelector('h1');

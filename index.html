@@ -11,9 +11,18 @@
 <body>
     <div class="container">
         <h1>Adivinhe a Palavra</h1>
+        <div class="nivel-btn">
+            <button onclick="selecionarNivel('facil')">Fácil</button>
+            <button onclick="selecionarNivel('medio')">Médio</button>
+            <button onclick="selecionarNivel('dificil')">Difícil</button>
+        </div>
 
         <div id="setup-container">
             <input onkeydown="iniciarJogo(event)" type="text" id="nickname-input" placeholder="Digite seu nickname">
+        </div>
+
+        <div id ="footer">
+            <p>Desenvolvido por Ferreira</p>
         </div>
 
         <div id="hint-container" class="hint-box hidden">
